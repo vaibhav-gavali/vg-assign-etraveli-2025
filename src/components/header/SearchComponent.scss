@@ -1,0 +1,26 @@
+.search-wrapper {
+  border: 1px solid var(--gray-color);
+  border-radius: 3px;
+
+  .input-wrapper {
+    width: 100%;
+    position: relative;
+    .icon {
+      position: absolute;
+      top: 10px;
+      left: 2px;
+    }
+    input {
+      border: 0;
+      outline: 0;
+      border-radius: 3px;
+      width: 100%;
+      padding-left: 20px;
+      box-sizing: border-box;
+      padding: 10px 10px 10px 20px;
+    }
+    input:focus {
+      outline: none;
+    }
+  }
+}

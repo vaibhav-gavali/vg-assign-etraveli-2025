@@ -1,0 +1,25 @@
+.item-wrapper {
+  border-bottom: 1px solid var(--lightGray-color);
+  padding: 20px 15px;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  &:hover,
+  &.selected {
+    background-color: var(--primary-color);
+  }
+
+  &.no-border {
+    border-bottom: none;
+  }
+
+  .episode,
+  .date {
+    color: var(--gray-color);
+    font-size: 12px;
+  }
+
+  .title {
+    margin: 0px 5px;
+  }
+}
