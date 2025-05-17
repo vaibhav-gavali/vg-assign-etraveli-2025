@@ -26,7 +26,7 @@ const App: React.FC<Props> = (props) => {
       setMovieListSuccess(data?.results ?? []);
       getMoviePosters(data?.results)
     },
-    onError: (error) => { setMovieListFailure() }
+    onError: (_error) => { setMovieListFailure() }
   })
 
   const getMoviePosters = async (movieList: any[]) => {
