@@ -37,3 +37,24 @@ git commit -m "Initial commit with all the Assigment changes"
 git remote add origin https://github.com/vaibhav-gavali/vg-assign-etraveli-2025.git
 git push -u origin master (For pushing from your local you need to create tokens now on github)
 ```
+
+## Steps for deploy website to github
+
+```js
+npm install --save-dev gh-pages
+
+// Add entry with base in vite.config.ts file
+export default defineConfig({
+  base: '/vg-assign-etraveli-2025/',
+})
+
+// Add deploy scripts in package.json
+"scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist"
+}
+
+npm run deploy
+
+https://<username>.github.io/vg-assign-etraveli-2025/
+```

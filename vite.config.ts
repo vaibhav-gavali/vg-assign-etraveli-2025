@@ -18,4 +18,6 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/utils/testing/setup.ts',
   },
+  // Github deployment Setup
+  base: '/vg-assign-etraveli-2025/'
 })
