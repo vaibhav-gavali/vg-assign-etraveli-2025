@@ -3,12 +3,7 @@ import type { CommonActionsType } from '../../model';
 import { Col, Row } from '../common';
 import './MovieItem.scss';
 import Rating from '../common/Rating';
-
-type Movie = {
-  title: string;
-  episode_id: number;
-  release_date: string;
-};
+import type { Movie } from './MoviesListComponent';
 
 interface Props {
   movie: Movie;
@@ -18,7 +13,7 @@ interface Props {
 
 const MovieItem: React.FC<Props> = (props) => {
   const { movie, selectSingleMovie, selected = false } = props;
-  const { title, episode_id, release_date } = movie;
+  const { title, episode_id, release_date, posterInfo: { imdbRating = 0 } = {} } = movie;
 
   return (
     <Row
@@ -37,9 +32,9 @@ const MovieItem: React.FC<Props> = (props) => {
       <Col flexGrow={1} colClassName="title">
         {title}
       </Col>
-      {/* <Col colClassName="date" data-testid="movie-ratings">
-        <Rating value={9} total={10} />
-      </Col> */}
+      <Col colClassName="date" data-testid="movie-ratings">
+        <Rating value={parseInt(imdbRating)} total={10} />
+      </Col>
       <Col colClassName="date" data-testid="movie-releaseDate">
         {release_date}
       </Col>

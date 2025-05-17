@@ -35,10 +35,17 @@ export const movieSlice = createSlice({
         setMovieCharactersFailure: (state) => {
             state.charactersList = [];
         },
+        setMoviePosterListSuccess: (state, action: PayloadAction<any[]>) => {
+            const postersData = action.payload;
+            state.list = state.list.map((movieItem) => {
+                const postedDataObj = postersData.find((posterObj) => posterObj.Title.includes(movieItem?.title))
+                return { ...movieItem, posterInfo: postedDataObj }
+            })
+        },
     },
 });
 
-export const { setMovieListSuccess, setMovieListFailure, selectSingleMovie, setMovieCharactersSuccess, setMovieCharactersFailure } =
+export const { setMovieListSuccess, setMovieListFailure, selectSingleMovie, setMovieCharactersSuccess, setMovieCharactersFailure, setMoviePosterListSuccess } =
     movieSlice.actions
 
 export default movieSlice.reducer;

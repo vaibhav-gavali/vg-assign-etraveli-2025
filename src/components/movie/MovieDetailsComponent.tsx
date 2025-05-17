@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
-import { Row, Modal } from '../common';
+import React, { useEffect, useState } from 'react';
+import { Row, Modal, Col } from '../common';
 import { currentMovieDetailsSelector } from '../../selectors';
 import { connect } from 'react-redux';
 import './MovieDetailsComponent.scss';
 import SingleMovieDetails from './SingleMovieDetails';
+import styled from 'styled-components';
+import type { Movie } from './MoviesListComponent';
+import ImageNotFound from '../../assets/image-not-found.png'
+import Rating from '../common/Rating';
 
-type Movie = {
-  title: string;
-  opening_crawl: string;
-  director: string;
-  producer: string;
-};
+const StyledImgCol = styled(Col)`
+  min-width: 30%;
+  max-width: 30%;
+ 
+
+  img{
+    width: 100%;
+    height: 200px;
+    Display: block;
+    border: 1px solid #000;
+    border-radius: 4px;
+    overflow: none;
+  }
+`
 
 interface Props {
   currentMovie: Movie;
@@ -24,10 +36,16 @@ const stylesForEmptyCondition = {
 
 const MovieDetailsComponent: React.FC<Props> = (props) => {
   const { currentMovie } = props;
-  const { title, opening_crawl, director, producer } = currentMovie;
+  const { title, opening_crawl, director, producer, posterInfo = {} } = currentMovie;
   const [showModal, setShowModal] = useState(false);
+  const [imgHasError, setImgHasError] = useState(false);
 
   const movieSelected = Object.keys(currentMovie).length > 0;
+
+  // Logic for handling the images with error
+  useEffect(() => {
+    setImgHasError(false);
+  }, [posterInfo?.Poster]);
 
   return (
     <Row
@@ -39,9 +57,19 @@ const MovieDetailsComponent: React.FC<Props> = (props) => {
         <Row data-testid="movie-details" flexDirection="column">
           <Row flexDirection="column">
             <h2>{title}</h2>
-            <p className="details">{opening_crawl}</p>
-            <div className="director">Directed by: {director}</div>
-            <div className="director">Produced by: {producer}</div>
+            <Row styles={{ gap: '10px', marginTop: '10px' }}>
+              <StyledImgCol>
+                {(imgHasError) ?
+                  <img src={ImageNotFound} alt="Fallback" /> :
+                  <img src={posterInfo?.Poster} alt="Movie Poster" onError={() => { setImgHasError(true) }} />}
+              </StyledImgCol>
+              <Col styles={{ flex: 1 }}><p className="details">{opening_crawl}</p></Col>
+
+            </Row>
+
+            <Col fullWidth colClassName="director" styles={{ marginTop: '10px' }}>Directed by: {director}</Col>
+            <Col fullWidth colClassName="director">Produced by: {producer}</Col>
+            <Col fullWidth styles={{ marginTop: '5px' }}><Rating value={parseInt(posterInfo?.imdbRating)} total={10} /></Col>
           </Row>
           <Row rowClassName="modal-wrapper">
             <button

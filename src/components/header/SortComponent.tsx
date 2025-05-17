@@ -8,10 +8,17 @@ export const SORT_OPTIONS = [
   {
     label: 'Episode',
     value: 'episode_id',
+    sort: 'asc'
   },
   {
     label: 'Year',
     value: 'release_date',
+    sort: 'desc'
+  },
+  {
+    label: 'Rating',
+    value: 'imdbRating',
+    sort: 'desc'
   },
 ];
 

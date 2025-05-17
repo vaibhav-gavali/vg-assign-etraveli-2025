@@ -6,10 +6,14 @@ import { connect } from 'react-redux';
 import type { CommonActionsType } from '../../model';
 import MovieItem from './MovieItem';
 
-type Movie = {
+export type Movie = {
   title: string;
   episode_id: number;
   release_date: string;
+  posterInfo: any;
+  opening_crawl: string;
+  director: string;
+  producer: string;
 };
 
 interface Props {

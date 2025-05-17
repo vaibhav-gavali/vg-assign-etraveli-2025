@@ -69,7 +69,7 @@ describe('MoviesListComponent Unit Tests', () => {
         option === 'episode_id' ? 'movie-episodeId' : 'movie-releaseDate';
 
       const elementToCheck = within(elements[0]).getByTestId(testId);
-      const valueToCheck = option === 'episode_id' ? 'EPISODE 1' : '1977-05-25';
+      const valueToCheck = option === 'episode_id' ? 'EPISODE 1' : '2015-12-11';
 
       expect(elementToCheck).toHaveTextContent(valueToCheck);
     });
