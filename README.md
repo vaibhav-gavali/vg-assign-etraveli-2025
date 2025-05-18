@@ -58,3 +58,22 @@ npm run deploy
 
 https://<username>.github.io/vg-assign-etraveli-2025/
 ```
+
+## Steps for asset compression to improve page performance
+
+```js
+npm install vite-plugin-compression --save-dev
+
+// Add entry in vite.config.ts file
+export default defineConfig({
+  plugins: [
+    react(),
+    viteCompression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      filter: /\.(js|css|html|svg)$/i,
+    }),
+  ],
+});
+
+```
